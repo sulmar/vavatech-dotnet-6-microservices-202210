@@ -5,7 +5,7 @@ namespace Core.Infrastructure
     public abstract class InMemoryEntityRepository<TEntity> : IEntityRepository<TEntity>
         where TEntity : BaseEntity
     {
-        private readonly IList<TEntity> _entities;
+        protected IList<TEntity> _entities;
         
         public virtual void Add(TEntity entity)
         {

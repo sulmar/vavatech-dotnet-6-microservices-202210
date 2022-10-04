@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CatalogService.Domain
+namespace CustomerService.Domain
 {
-    public interface IProductRepository : IEntityRepository<Product>
+    public interface ICustomerRepository : IEntityRepository<Customer>
     {
-       
+
     }
 }

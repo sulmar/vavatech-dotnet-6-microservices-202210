@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.JsonPatch;
 
 namespace CatalogService.Api.Controllers
 {
+    
+
+    // products+
+   
     [ApiController]
     [Route("/api/products")]  // RoutePrefix
     public class ProductsController : ControllerBase
@@ -19,8 +23,15 @@ namespace CatalogService.Api.Controllers
             _productRepository = productRepository;
         }
 
+        // GET api/customers/{id}/products
+        [HttpGet("/api/customers/{customerId}/products")]
+        public void GetByCustomer(int customerId)
+        {
+            throw new NotImplementedException();
+        }
 
-        // GET /api/products
+
+        // GET /api/products           
         [HttpGet]
         public IEnumerable<Product> Get()
         {
@@ -30,7 +41,8 @@ namespace CatalogService.Api.Controllers
         }
 
         // GET /api/products/{id}
-        [HttpGet("{id}", Name = "GetProductById")]
+        [HttpGet("{id}.{format?}", Name = "GetProductById")]
+        [FormatFilter]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -64,9 +76,11 @@ namespace CatalogService.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
-        public ActionResult<Product> Post(Product product)
+        public ActionResult<Product> Post(Product product, [FromServices] IMessageService messageService)
         {
             _productRepository.Add(product);
+
+            messageService.Send(product);
 
             // zła praktyka
             // return Created($"http://localhost:5000/api/products/{product.Id}", product);
@@ -147,6 +161,8 @@ namespace CatalogService.Api.Controllers
 
 
         // PATCH api/products/{id}/Accept                
+
+        [HttpPatch("{id}/Accept")]
         public ActionResult Accept(int id)
         {
             var product = _productRepository.Get(id);

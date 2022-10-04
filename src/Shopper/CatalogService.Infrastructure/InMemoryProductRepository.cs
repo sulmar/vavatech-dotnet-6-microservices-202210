@@ -5,16 +5,19 @@ namespace CatalogService.Infrastructure
 
     public class InMemoryProductRepository : IProductRepository
     {
-        private readonly ICollection<Product> _products;
+        private readonly IList<Product> _products;
 
         public InMemoryProductRepository()
         {
             _products = new List<Product>
             {
                 new Product { Id = 1, Name = "Product 1"  },
-                new Product { Id = 2, Name = "Product 2" },
+                new Product { Id = 2, Name = "Product 2", Status = ProductStatus.Published },
                 new Product { Id = 3, Name = "Product 3" },
             };
+
+             _products[1].Alernate = _products[0];
+            _products[0].Alernate = new Service { Id = 4, Name = "Service 1" };
         }
 
         public void Add(Product product)
