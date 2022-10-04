@@ -2,14 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
-
+using MediatR;
+using CatalogService.Api.Commands;
+using CatalogService.Api.Queries;
 
 namespace CatalogService.Api.Controllers
 {
-    
+
+    // CQRS Command Query Responsibility Segregation
+
 
     // products+
-   
+
     [ApiController]
     [Route("/api/products")]  // RoutePrefix
     public class ProductsController : ControllerBase
@@ -46,9 +50,9 @@ namespace CatalogService.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public ActionResult<Product> Get([FromRoute] int id)
+        public async Task<ActionResult<Product>> Get([FromRoute] int id, [FromServices] IMediator mediator)
         {
-            var product = _productRepository.Get(id);
+            Product product = await mediator.Send(new GetProductByIdQuery(id));
 
             if (product is null)
             {
@@ -76,11 +80,13 @@ namespace CatalogService.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
-        public ActionResult<Product> Post(Product product, [FromServices] IMessageService messageService)
+        public ActionResult<Product> Post(Product product, [FromServices] IMediator mediator)
         {
-            _productRepository.Add(product);
+            mediator.Publish(new AddProductCommand(product));
 
-            messageService.Send(product);
+           // _productRepository.Add(product);
+           
+           // messageService.Send(product);
 
             // zła praktyka
             // return Created($"http://localhost:5000/api/products/{product.Id}", product);

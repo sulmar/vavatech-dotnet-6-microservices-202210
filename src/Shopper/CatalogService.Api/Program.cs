@@ -1,5 +1,6 @@
 using CatalogService.Domain;
 using CatalogService.Infrastructure;
+using MediatR;
 using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json.Converters;
 
@@ -31,6 +32,9 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<GzipCompressionProvider>();
     options.Providers.Add<BrotliCompressionProvider>();
 });
+
+// dotnet add package MediatR.Extensions.Autofac.DependencyInjection
+builder.Services.AddMediatR(typeof(Program));
 
 //if (builder.Environment.IsDevelopment())
 //{
