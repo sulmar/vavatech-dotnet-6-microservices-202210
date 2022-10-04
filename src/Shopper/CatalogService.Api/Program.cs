@@ -1,7 +1,12 @@
+using CatalogService.Api.HealthChecks;
 using CatalogService.Domain;
 using CatalogService.Infrastructure;
+using HealthChecks.UI.Client;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +41,28 @@ builder.Services.AddResponseCompression(options =>
 // dotnet add package MediatR.Extensions.Autofac.DependencyInjection
 builder.Services.AddMediatR(typeof(Program));
 
+// Health Check
+builder.Services.AddHealthChecks()
+    .AddCheck("Ping", () => HealthCheckResult.Healthy() )
+    .AddCheck<NbpApiHealthCheck>("nbpapi")
+    .AddCheck("Random", () =>
+    {
+        if (DateTime.Now.Minute % 2 == 0)
+        {
+            return HealthCheckResult.Healthy();
+        }
+        else
+        {
+            return HealthCheckResult.Unhealthy();
+        }
+    });
+
+// dotnet add package AspNetCore.HealthChecks.UI 
+// dotnet add package AspNetCore.HealthChecks.UI.InMemory.Storage
+builder.Services
+    .AddHealthChecksUI()
+    .AddInMemoryStorage();
+
 //if (builder.Environment.IsDevelopment())
 //{
 //    
@@ -52,6 +79,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -59,5 +88,17 @@ app.UseAuthorization();
 app.UseResponseCompression();
 
 app.MapControllers();
+
+
+
+app.MapGet("api/ping", context => context.Response.WriteAsync("Pong"));
+
+app.MapHealthChecks("/health", new HealthCheckOptions()
+{
+    Predicate = _ => true,
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+
+app.MapHealthChecksUI(); // /healtchecks-ui
 
 app.Run();

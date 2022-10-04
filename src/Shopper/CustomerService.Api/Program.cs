@@ -4,6 +4,9 @@
 using CustomerService.Api;
 using CustomerService.Domain;
 using CustomerService.Infrastructure;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ICustomerRepository, InMemoryCustomerRepository>();
+
+
+builder.Services.AddHealthChecks()
+        .AddCheck("Ping", () => HealthCheckResult.Healthy());
 
 var app = builder.Build();
 
@@ -72,5 +79,11 @@ app.MapGet("api/test", (HttpRequest req, HttpResponse res) =>
 {
     return Results.Extensions.NotModified();
 });
-        
+
+app.MapHealthChecks("/health", new HealthCheckOptions()
+{
+    Predicate = _ => true,
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+
 app.Run();
