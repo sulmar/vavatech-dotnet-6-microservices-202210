@@ -53,7 +53,7 @@ builder.Services.AddHealthChecks()
         }
         else
         {
-            return HealthCheckResult.Unhealthy();
+            return HealthCheckResult.Unhealthy(description: "Test", new ApplicationException("My Exception"));
         }
     });
 
