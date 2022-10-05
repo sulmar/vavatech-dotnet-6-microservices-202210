@@ -5,7 +5,6 @@ using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json.Converters;
 
@@ -57,11 +56,6 @@ builder.Services.AddHealthChecks()
         }
     });
 
-// dotnet add package AspNetCore.HealthChecks.UI 
-// dotnet add package AspNetCore.HealthChecks.UI.InMemory.Storage
-builder.Services
-    .AddHealthChecksUI()
-    .AddInMemoryStorage();
 
 //if (builder.Environment.IsDevelopment())
 //{
@@ -99,6 +93,5 @@ app.MapHealthChecks("/health", new HealthCheckOptions()
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
-app.MapHealthChecksUI(); // /healtchecks-ui
 
 app.Run();
