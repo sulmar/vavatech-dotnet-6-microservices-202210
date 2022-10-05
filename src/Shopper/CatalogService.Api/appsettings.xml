@@ -1,0 +1,8 @@
+﻿<Configuration>
+
+	<NBPApi>
+		<Url>https://test.nbp.pl</Url>
+	</NBPApi>
+
+
+</Configuration>

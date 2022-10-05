@@ -5,10 +5,26 @@ using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: false);
+builder.Configuration.AddJsonFile("appsettings.staging.json", optional: true);
+builder.Configuration.AddXmlFile("appsettings.xml", optional: true);
+builder.Configuration.AddCommandLine(args);
+builder.Configuration.AddUserSecrets<Program>();
+
+// string npbApiUrl =  builder.Configuration["NBPApiUrl"];
+// string npbApiUrl = builder.Configuration["NBPApi:Url"];
+// string npbApiTable = builder.Configuration["NBPApi:Table"];
+// string npbApiFormat = builder.Configuration["NBPApi:Format"];
+
+
+builder.Services.Configure<NbpApiOptions>(builder.Configuration.GetSection("NBPApi"));
+
 
 // Add services to the container.
 
