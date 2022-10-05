@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.JsonPatch;
 using MediatR;
 using CatalogService.Api.Commands;
 using CatalogService.Api.Queries;
+using Microsoft.AspNetCore.SignalR;
+using CatalogService.Api.Hubs;
 
 namespace CatalogService.Api.Controllers
 {
@@ -21,10 +23,12 @@ namespace CatalogService.Api.Controllers
         // GET http://localhost:5000/api/products
 
         private readonly IProductRepository _productRepository;
+        private readonly IHubContext<ProductsHub> hubContext;
 
-        public ProductsController(IProductRepository productRepository)
+        public ProductsController(IProductRepository productRepository, IHubContext<ProductsHub> hubContext)
         {
             _productRepository = productRepository;
+            this.hubContext = hubContext;
         }
 
         // GET api/customers/{id}/products
@@ -84,9 +88,11 @@ namespace CatalogService.Api.Controllers
         {
             mediator.Publish(new AddProductCommand(product));
 
+            hubContext.Clients.All.SendAsync("AddedProduct", product);
+
            // _productRepository.Add(product);
-           
-           // messageService.Send(product);
+
+            // messageService.Send(product);
 
             // zła praktyka
             // return Created($"http://localhost:5000/api/products/{product.Id}", product);
