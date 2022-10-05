@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "WarehouseService.Api";
+
+package warehouse;
+
+service WarehouseService {
+
+	rpc GetProductState (GetProductStateRequest) returns (GetProductStateResponse);
+	rpc SubscribeProductState (GetProductStateRequest) returns (stream GetProductStateResponse);
+}
+
+message GetProductStateRequest {
+	int32 product_id = 1; 
+	string color = 2;
+}
+
+message GetProductStateResponse {
+	bool is_available = 1;
+	int32 quantity = 2; 	
+}
+
+message Location {
+	double lat = 1;
+	double lng = 2;
+}
+
+
