@@ -6,4 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.31" />
+    <PackageReference Include="Hangfire.InMemory" Version="0.3.4" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OCRService.Domain\OCRService.Domain.csproj" />
+    <ProjectReference Include="..\OCRService.Infrastructure\OCRService.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

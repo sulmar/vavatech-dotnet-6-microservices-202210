@@ -71,6 +71,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Api", "Deli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryClient.Sender", "DeliveryClient.Sender\DeliveryClient.Sender.csproj", "{61377A1A-D98C-4462-B1BF-F05FC1BC083F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRService.Domain", "OCRService.Domain\OCRService.Domain.csproj", "{9EAEE379-674D-44FB-AB83-51FCAF00C734}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRService.Infrastructure", "OCRService.Infrastructure\OCRService.Infrastructure.csproj", "{CD131E33-5910-47B8-AF48-55E3F72B0EEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +173,14 @@ Global
 		{61377A1A-D98C-4462-B1BF-F05FC1BC083F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61377A1A-D98C-4462-B1BF-F05FC1BC083F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61377A1A-D98C-4462-B1BF-F05FC1BC083F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EAEE379-674D-44FB-AB83-51FCAF00C734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EAEE379-674D-44FB-AB83-51FCAF00C734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EAEE379-674D-44FB-AB83-51FCAF00C734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EAEE379-674D-44FB-AB83-51FCAF00C734}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD131E33-5910-47B8-AF48-55E3F72B0EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD131E33-5910-47B8-AF48-55E3F72B0EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD131E33-5910-47B8-AF48-55E3F72B0EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD131E33-5910-47B8-AF48-55E3F72B0EEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -205,6 +217,8 @@ Global
 		{001AABF5-8887-499A-850A-5BB807EC4485} = {19FF0573-836C-45E0-BD84-38484E23C5FB}
 		{58EF0651-5B12-41B9-BB00-4432BF15259A} = {19FF0573-836C-45E0-BD84-38484E23C5FB}
 		{61377A1A-D98C-4462-B1BF-F05FC1BC083F} = {D6F36043-88A7-4AFC-9FA7-2DA6F01552B0}
+		{9EAEE379-674D-44FB-AB83-51FCAF00C734} = {55177C0E-217B-4328-AE18-FC0813F8E421}
+		{CD131E33-5910-47B8-AF48-55E3F72B0EEE} = {55177C0E-217B-4328-AE18-FC0813F8E421}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {061FBFFE-C8E8-4548-A8D8-94608330A520}
