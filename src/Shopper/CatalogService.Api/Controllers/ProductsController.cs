@@ -18,14 +18,14 @@ namespace CatalogService.Api.Controllers
 
     [ApiController]
     [Route("/api/products")]  // RoutePrefix
-    public class ProductsController : ControllerBase
+    public class ProductsV1Controller : ControllerBase
     {
         // GET http://localhost:5000/api/products
 
         private readonly IProductRepository _productRepository;
         //private readonly IHubContext<ProductsHub> hubContext;
 
-        public ProductsController(IProductRepository productRepository
+        public ProductsV1Controller(IProductRepository productRepository
             //, IHubContext<ProductsHub> hubContext
             )
         {

@@ -1,4 +1,5 @@
 using CatalogService.Api.HealthChecks;
+using CatalogService.Api.Middlewares;
 using CatalogService.Domain;
 using CatalogService.Infrastructure;
 using HealthChecks.UI.Client;
@@ -91,6 +92,8 @@ builder.Services.AddHealthChecks()
     });
 
 
+builder.Services.AddTransient<AddVersionMiddleware>();
+
 //if (builder.Environment.IsDevelopment())
 //{
 //    
@@ -115,8 +118,27 @@ app.UseAuthorization();
 
 app.UseResponseCompression();
 
+
 app.MapControllers();
 
+//app.Use(async (context, next) =>
+//{
+//    context.Response.OnStarting(() =>
+//    {
+//        context.Response.Headers.Add("X-Version", "1.0");
+
+//        return Task.CompletedTask;
+//    });
+
+//    await next();
+//});
+
+
+// W³asny middleware do wersjonowania
+app.UseVersion();
+
+// Biblioteka - patrz 
+// https://github.com/dotnet/aspnet-api-versioning/wiki
 
 
 app.MapGet("api/ping", context => context.Response.WriteAsync("Pong"));
