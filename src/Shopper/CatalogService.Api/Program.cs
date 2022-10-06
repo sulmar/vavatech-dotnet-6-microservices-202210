@@ -17,6 +17,8 @@ builder.Configuration.AddXmlFile("appsettings.xml", optional: true);
 builder.Configuration.AddCommandLine(args);
 builder.Configuration.AddUserSecrets<Program>();
 
+var awsKey = builder.Configuration["AWS:SecretKey"];
+
 // string npbApiUrl =  builder.Configuration["NBPApiUrl"];
 // string npbApiUrl = builder.Configuration["NBPApi:Url"];
 // string npbApiTable = builder.Configuration["NBPApi:Table"];
