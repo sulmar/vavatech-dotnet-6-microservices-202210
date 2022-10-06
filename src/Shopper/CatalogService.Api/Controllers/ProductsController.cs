@@ -23,12 +23,14 @@ namespace CatalogService.Api.Controllers
         // GET http://localhost:5000/api/products
 
         private readonly IProductRepository _productRepository;
-        private readonly IHubContext<ProductsHub> hubContext;
+        //private readonly IHubContext<ProductsHub> hubContext;
 
-        public ProductsController(IProductRepository productRepository, IHubContext<ProductsHub> hubContext)
+        public ProductsController(IProductRepository productRepository
+            //, IHubContext<ProductsHub> hubContext
+            )
         {
             _productRepository = productRepository;
-            this.hubContext = hubContext;
+            //this.hubContext = hubContext;
         }
 
         // GET api/customers/{id}/products
@@ -88,7 +90,7 @@ namespace CatalogService.Api.Controllers
         {
             mediator.Publish(new AddProductCommand(product));
 
-            hubContext.Clients.All.SendAsync("AddedProduct", product);
+            // hubContext.Clients.All.SendAsync("AddedProduct", product);
 
            // _productRepository.Add(product);
 

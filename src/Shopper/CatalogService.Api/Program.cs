@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json.Converters;
+using Serilog;
+using Serilog.Formatting.Compact;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,20 @@ var awsKey = builder.Configuration["AWS:SecretKey"];
 // string npbApiTable = builder.Configuration["NBPApi:Table"];
 // string npbApiFormat = builder.Configuration["NBPApi:Format"];
 
+
+// dotnet add package Serilog.AspNetCore
+builder.Host.UseSerilog((context, logger) =>
+{
+    logger.WriteTo.Console();
+    logger.WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day);
+    logger.WriteTo.File(new CompactJsonFormatter(), "logs/log.json");
+
+    // dotnet add package Serilog.Sinks.Seq
+    logger.WriteTo.Seq("http://localhost:5341");
+
+    logger.Enrich.WithProperty("Name", "CatalogService");
+    logger.Enrich.WithMemoryUsage();
+});
 
 builder.Services.Configure<NbpApiOptions>(builder.Configuration.GetSection("NBPApi"));
 
@@ -110,6 +126,8 @@ app.MapHealthChecks("/health", new HealthCheckOptions()
     Predicate = _ => true,
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
+
+
 
 
 app.Run();
