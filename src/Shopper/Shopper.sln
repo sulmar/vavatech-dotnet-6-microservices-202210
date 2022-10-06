@@ -45,35 +45,41 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRService.Api", "OCRServic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthCheckService", "HealthCheckService", "{2B8F735E-8D70-45B4-A0F0-5570264A4DFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthCheck.Api", "HealthCheck.Api\HealthCheck.Api.csproj", "{E58D1DD9-CB9C-46C8-BCCA-71390DC87DBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCheck.Api", "HealthCheck.Api\HealthCheck.Api.csproj", "{E58D1DD9-CB9C-46C8-BCCA-71390DC87DBD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TrackingService", "TrackingService", "{6F045D79-8A1E-4AC5-B21D-699A463F7F1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackingService.Domain", "TrackingService.Domain\TrackingService.Domain.csproj", "{9CB976C4-9D00-485C-AF11-02C92952FD3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackingService.Domain", "TrackingService.Domain\TrackingService.Domain.csproj", "{9CB976C4-9D00-485C-AF11-02C92952FD3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackingService.Api", "TrackingService.Api\TrackingService.Api.csproj", "{A09EE37B-61F5-4A27-82A0-853625B9648A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackingService.Api", "TrackingService.Api\TrackingService.Api.csproj", "{A09EE37B-61F5-4A27-82A0-853625B9648A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackingClient.Sender", "TrackingClient.Sender\TrackingClient.Sender.csproj", "{383C3948-DA12-4EA4-9027-A2FB65C9711A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackingClient.Sender", "TrackingClient.Sender\TrackingClient.Sender.csproj", "{383C3948-DA12-4EA4-9027-A2FB65C9711A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackingClient.Receiver", "TrackingClient.Receiver\TrackingClient.Receiver.csproj", "{4DEFEAEC-A39F-4735-B739-7CDB9916764B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackingClient.Receiver", "TrackingClient.Receiver\TrackingClient.Receiver.csproj", "{4DEFEAEC-A39F-4735-B739-7CDB9916764B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WarehouseService", "WarehouseService", "{F5FC0CF2-F6D8-4B9A-8B1D-3884B0498AEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseService.Api", "WarehouseService.Api\WarehouseService.Api.csproj", "{28D75101-A84C-49BF-8D2F-7B3689773EB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseService.Api", "WarehouseService.Api\WarehouseService.Api.csproj", "{28D75101-A84C-49BF-8D2F-7B3689773EB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseClient.Receiver", "WarehouseClient.Receiver\WarehouseClient.Receiver.csproj", "{ADCCD3EC-9027-4515-9D43-D592280B432F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseClient.Receiver", "WarehouseClient.Receiver\WarehouseClient.Receiver.csproj", "{ADCCD3EC-9027-4515-9D43-D592280B432F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeliveryService", "DeliveryService", "{19FF0573-836C-45E0-BD84-38484E23C5FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Contracts", "DeliveryService.Contracts\DeliveryService.Contracts.csproj", "{001AABF5-8887-499A-850A-5BB807EC4485}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Contracts", "DeliveryService.Contracts\DeliveryService.Contracts.csproj", "{001AABF5-8887-499A-850A-5BB807EC4485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService.Api", "DeliveryService.Api\DeliveryService.Api.csproj", "{58EF0651-5B12-41B9-BB00-4432BF15259A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryService.Api", "DeliveryService.Api\DeliveryService.Api.csproj", "{58EF0651-5B12-41B9-BB00-4432BF15259A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryClient.Sender", "DeliveryClient.Sender\DeliveryClient.Sender.csproj", "{61377A1A-D98C-4462-B1BF-F05FC1BC083F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryClient.Sender", "DeliveryClient.Sender\DeliveryClient.Sender.csproj", "{61377A1A-D98C-4462-B1BF-F05FC1BC083F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRService.Domain", "OCRService.Domain\OCRService.Domain.csproj", "{9EAEE379-674D-44FB-AB83-51FCAF00C734}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRService.Domain", "OCRService.Domain\OCRService.Domain.csproj", "{9EAEE379-674D-44FB-AB83-51FCAF00C734}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRService.Infrastructure", "OCRService.Infrastructure\OCRService.Infrastructure.csproj", "{CD131E33-5910-47B8-AF48-55E3F72B0EEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRService.Infrastructure", "OCRService.Infrastructure\OCRService.Infrastructure.csproj", "{CD131E33-5910-47B8-AF48-55E3F72B0EEE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserService", "UserService", "{C5B91F9F-9D05-47BE-8136-47093F0E033B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Api", "UserService.Api\UserService.Api.csproj", "{772852D6-5C8D-4858-ABF6-E400804A4E39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Domain", "UserService.Domain\UserService.Domain.csproj", "{60CA12D2-EA0C-482A-AAEA-86A6DCCBE095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +187,14 @@ Global
 		{CD131E33-5910-47B8-AF48-55E3F72B0EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD131E33-5910-47B8-AF48-55E3F72B0EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD131E33-5910-47B8-AF48-55E3F72B0EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{772852D6-5C8D-4858-ABF6-E400804A4E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{772852D6-5C8D-4858-ABF6-E400804A4E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{772852D6-5C8D-4858-ABF6-E400804A4E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{772852D6-5C8D-4858-ABF6-E400804A4E39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60CA12D2-EA0C-482A-AAEA-86A6DCCBE095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60CA12D2-EA0C-482A-AAEA-86A6DCCBE095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60CA12D2-EA0C-482A-AAEA-86A6DCCBE095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60CA12D2-EA0C-482A-AAEA-86A6DCCBE095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -219,6 +233,9 @@ Global
 		{61377A1A-D98C-4462-B1BF-F05FC1BC083F} = {D6F36043-88A7-4AFC-9FA7-2DA6F01552B0}
 		{9EAEE379-674D-44FB-AB83-51FCAF00C734} = {55177C0E-217B-4328-AE18-FC0813F8E421}
 		{CD131E33-5910-47B8-AF48-55E3F72B0EEE} = {55177C0E-217B-4328-AE18-FC0813F8E421}
+		{C5B91F9F-9D05-47BE-8136-47093F0E033B} = {5DF4334A-27FA-4BD9-88DF-7710DD13B756}
+		{772852D6-5C8D-4858-ABF6-E400804A4E39} = {C5B91F9F-9D05-47BE-8136-47093F0E033B}
+		{60CA12D2-EA0C-482A-AAEA-86A6DCCBE095} = {C5B91F9F-9D05-47BE-8136-47093F0E033B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {061FBFFE-C8E8-4548-A8D8-94608330A520}
