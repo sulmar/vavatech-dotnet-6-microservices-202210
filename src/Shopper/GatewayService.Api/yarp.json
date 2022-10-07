@@ -1,0 +1,68 @@
+{
+
+  "ReverseProxy": {
+
+    "Routes": {
+
+      "users-route": {
+
+        "ClusterId": "users-cluster",
+        "Match": {
+          "Host": "localhost",
+          "Path": "/api/users/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api"
+          },
+          {
+            "RequestHeader": "X-Custom-Header",
+            "Append": "boo"
+          },
+          {
+            "ResponseHeader": "X-Custom-Header",
+            "Append": "bar",
+            "When": "Always"
+          },
+          { "RequestHeadersCopy": "true" }
+        ]
+      }
+
+
+    },
+
+    "Clusters": {
+
+      "users-cluster": {
+
+        "LoadBalancingPolicy": "PowerOfTwoChoices",
+
+        "HealthCheck": {
+          "Active": {
+            "Enabled": "true",
+            "Interval": "00:00:10",
+            "Timeout": "00:00:10",
+            "Policy": "ConsecutiveFailures",
+            "Path": "/health"
+          }
+        },
+        "Metadata": {
+          "ConsecutiveFailuresHealthPolicy.Threshold": "3"
+        },
+
+        "Destinations": {
+          "users-cluster/destination1": {
+            "Address": "http://localhost:5070"
+          },
+          "users-cluster/destination2": {
+            "Address": "http://localhost:5072"
+          }
+        }
+
+      }
+    }
+
+
+  }
+
+}
