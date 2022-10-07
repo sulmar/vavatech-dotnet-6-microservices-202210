@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<Faker<User>, UserFaker>();
 builder.Services.AddSingleton<IUserRepository, FakeUserRepository>();
 builder.Services.AddSingleton<IAuthService, MyAuthService>();
-builder.Services.AddSingleton<ITokenService, FakeTokenService>();
+builder.Services.AddSingleton<ITokenService, JwtTokenService>();
 
 var app = builder.Build();
 

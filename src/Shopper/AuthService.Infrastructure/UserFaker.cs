@@ -7,6 +7,7 @@ namespace AuthService.Infrastructure
     {
         public UserFaker()
         {
+            UseSeed(0);
             StrictMode(true);
             RuleFor(p => p.Id, f => f.IndexFaker);
             RuleFor(p => p.Username, f => f.Person.UserName);

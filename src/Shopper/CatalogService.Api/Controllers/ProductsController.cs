@@ -8,6 +8,7 @@ using CatalogService.Api.Queries;
 using Microsoft.AspNetCore.SignalR;
 using CatalogService.Api.Hubs;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace CatalogService.Api.Controllers
 {
@@ -16,6 +17,8 @@ namespace CatalogService.Api.Controllers
 
 
     // products+
+
+    [Authorize]
     [ApiController]
     [Route("/api/products")]  // RoutePrefix
     public class ProductsV1Controller : ControllerBase
@@ -42,6 +45,7 @@ namespace CatalogService.Api.Controllers
 
 
         // GET /api/products           
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Product> Get()
         {
@@ -83,18 +87,17 @@ namespace CatalogService.Api.Controllers
 
         // POST api/products
 
-       // [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
         public ActionResult<Product> Post(Product product, [FromServices] IMediator mediator)
         {
-
             if (!this.User.Identity.IsAuthenticated)
             {
                 return Unauthorized();
             }
-
+           
+             string email = User.FindFirstValue(ClaimTypes.Email);          
 
             mediator.Publish(new AddProductCommand(product));
 

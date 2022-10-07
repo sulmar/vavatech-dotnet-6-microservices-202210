@@ -4,13 +4,16 @@ using CatalogService.Domain;
 using CatalogService.Infrastructure;
 using HealthChecks.UI.Client;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Converters;
 using Serilog;
 using Serilog.Formatting.Compact;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +25,34 @@ builder.Configuration.AddUserSecrets<Program>();
 
 var awsKey = builder.Configuration["AWS:SecretKey"];
 
+
 // string npbApiUrl =  builder.Configuration["NBPApiUrl"];
 // string npbApiUrl = builder.Configuration["NBPApi:Url"];
 // string npbApiTable = builder.Configuration["NBPApi:Table"];
 // string npbApiFormat = builder.Configuration["NBPApi:Format"];
+
+// dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+
+string secretKey = "your-256-bit-secret";
+var key = Encoding.UTF8.GetBytes(secretKey);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = true,
+            ValidIssuer = "http://myauthapi.com",
+            ValidateAudience = true,
+            ValidAudience = "http://myshopper.com"
+        };
+    });
 
 
 // dotnet add package Serilog.AspNetCore
@@ -114,6 +141,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseResponseCompression();
