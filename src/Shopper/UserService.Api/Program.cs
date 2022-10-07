@@ -1,7 +1,13 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using StackExchange.Redis;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using UserService.Domain;
@@ -14,7 +20,30 @@ builder.Services.AddScoped(client => new HttpClient
 });
 
 
+// dotnet add package OpenTelemetry.Instrumentation.AspNetCore --prelease
+// dotnet add package OpenTelemetry.Extensions.Hosting --prelease
+//  dotnet add package OpenTelemetry.Exporter.Console --prelease
+// dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol --prelease
+// dotnet add package OpenTelemetry.Instrumentation.Http --prelease
+// dotnet add package OpenTelemetry.Instrumentation.StackExchangeRedis --prelease
+
+string serviceName = "UsersApi";
+string serviceVersion = "1.0";
+
 builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("redis")));
+
+
+builder.Services.AddOpenTelemetryTracing(builder =>
+{
+    builder
+        .AddConsoleExporter()
+        .AddOtlpExporter(options => options.Endpoint = new Uri("http://localhost:4317"))        
+        .AddSource(serviceName)
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName: serviceName, serviceVersion: serviceVersion))
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddRedisInstrumentation();
+});
 
 
 // dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
@@ -24,13 +53,29 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "SampleInstance";
 });
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
 
 
 app.UseHttpsRedirection();
 
 
-app.MapGet("/users", async (HttpClient client, ILogger<Program> logger) =>
+var activitySource = new ActivitySource(serviceName, serviceVersion);
+
+
+app.MapGet("/hello", () =>
+{
+    using var activity = activitySource.StartActivity();
+    activity.SetTag("foo", 1);
+    activity.SetTag("bar", "Hello World");
+    activity.SetTag("boo", new int[] { 1, 2, 3});
+
+    return "Hello World!";
+});
+
+
+app.MapGet("users", async (HttpClient client, ILogger<Program> logger) =>
 {
     logger.LogInformation("Users retrieved from API");
 
@@ -42,8 +87,11 @@ app.MapGet("/users", async (HttpClient client, ILogger<Program> logger) =>
 
 // dotnet add package StackExchange.Redis
 
-app.MapGet("/cached-users", async (HttpClient client, IConnectionMultiplexer connectionMultiplexer, ILogger<Program> logger) =>
+app.MapGet("users/cached", async (HttpClient client, 
+    IConnectionMultiplexer connectionMultiplexer, 
+    ILogger<Program> logger) =>
 {
+
     var db = connectionMultiplexer.GetDatabase();
 
     var data = await db.StringGetAsync("users");
@@ -101,7 +149,7 @@ app.MapGet("/distributed-cached-users", async (HttpClient client, IDistributedCa
     }
 });
 
-
+app.MapHealthChecks("/health");
 
 app.Run();
 
