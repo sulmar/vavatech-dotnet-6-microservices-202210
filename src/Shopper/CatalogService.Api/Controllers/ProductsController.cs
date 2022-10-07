@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SignalR;
 using CatalogService.Api.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using CatalogService.Api.AuthorizationRequirements;
 
 namespace CatalogService.Api.Controllers
 {
@@ -45,7 +46,7 @@ namespace CatalogService.Api.Controllers
 
 
         // GET /api/products           
-        [AllowAnonymous]
+        [Authorize(Policy = "Adult")]        
         [HttpGet]
         public IEnumerable<Product> Get()
         {
@@ -174,14 +175,25 @@ namespace CatalogService.Api.Controllers
         // https://learn.microsoft.com/pl-pl/aspnet/core/web-api/jsonpatch?view=aspnetcore-6.0
 
         [HttpPatch("{id}")]
-        public ActionResult Patch(int id, JsonPatchDocument<Product> patchProduct)
+        public async Task<ActionResult> PatchAsync(int id, JsonPatchDocument<Product> patchProduct,
+            [FromServices] IAuthorizationService authorizationService
+            )
         {
             var product = _productRepository.Get(id);
 
-            patchProduct.ApplyTo(product);
+            var result = await authorizationService.AuthorizeAsync(User, product, new TheSameOwnerRequirement());
 
+            if (result.Succeeded)
+            {
+                patchProduct.ApplyTo(product);
 
-            return NoContent();
+                return NoContent();
+            }
+            else
+            {
+                return Forbid();
+            }
+
         }
 
 

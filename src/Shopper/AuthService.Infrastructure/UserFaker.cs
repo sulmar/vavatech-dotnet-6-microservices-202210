@@ -15,7 +15,7 @@ namespace AuthService.Infrastructure
             RuleFor(p => p.LastName, f=>f.Person.LastName);
             RuleFor(p => p.Email, f => f.Person.Email);
             RuleFor(p => p.Phone, f => f.Phone.PhoneNumber());
-            RuleFor(p => p.Birthday, f => f.Date.Past(60));
+            RuleFor(p => p.Birthday, f => f.Date.Past(40));
 
             // TODO: zahashować!
             RuleFor(p => p.HashedPassword, f => "12345");

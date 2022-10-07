@@ -1,3 +1,5 @@
+using CatalogService.Api.AuthorizationHandlers;
+using CatalogService.Api.AuthorizationRequirements;
 using CatalogService.Api.HealthChecks;
 using CatalogService.Api.Middlewares;
 using CatalogService.Domain;
@@ -5,6 +7,7 @@ using CatalogService.Infrastructure;
 using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Converters;
 using Serilog;
 using Serilog.Formatting.Compact;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,6 +58,19 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Adult", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireMinimumAge(30);
+    });
+});
+
+
+builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, TheSameOwnerHandler>();
 
 // dotnet add package Serilog.AspNetCore
 builder.Host.UseSerilog((context, logger) =>

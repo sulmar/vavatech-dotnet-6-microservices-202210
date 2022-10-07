@@ -11,9 +11,9 @@ namespace CatalogService.Infrastructure
         {
             _products = new List<Product>
             {
-                new Product { Id = 1, Name = "Product 1"  },
-                new Product { Id = 2, Name = "Product 2", Status = ProductStatus.Published },
-                new Product { Id = 3, Name = "Product 3", IsRemoved = true },
+                new Product { Id = 1, Name = "Product 1", Owner = "Ernestine.Runte"  },
+                new Product { Id = 2, Name = "Product 2", Status = ProductStatus.Published, Owner = "John.Smith" },
+                new Product { Id = 3, Name = "Product 3", IsRemoved = true, Owner = "John.Smith" },
             };
 
              _products[1].Alernate = _products[0];

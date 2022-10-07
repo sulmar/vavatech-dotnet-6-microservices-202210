@@ -25,6 +25,7 @@ namespace AuthService.Infrastructure
             identity.AddClaim(new Claim(ClaimTypes.Role, "Employee"));
             identity.AddClaim(new Claim(ClaimTypes.Role, "Developer"));
             identity.AddClaim(new Claim(ClaimTypes.Role, "Trainer"));
+            identity.AddClaim(new Claim(ClaimTypes.DateOfBirth, user.Birthday.ToShortDateString()));
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
