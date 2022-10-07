@@ -23,6 +23,8 @@
   <ItemGroup>
     <ProjectReference Include="..\CatalogService.Domain\CatalogService.Domain.csproj" />
     <ProjectReference Include="..\CatalogService.Infrastructure\CatalogService.Infrastructure.csproj" />
+    <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
+    <ProjectReference Include="..\Core.Infrastructure\Core.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

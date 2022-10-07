@@ -49,9 +49,14 @@ namespace CatalogService.Api.Controllers
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            var products = _productRepository.Get();
-
-            return products;
+            if (User.IsInRole("Employee"))
+            {
+                return _productRepository.Get();
+            }
+            else
+            {
+                return _productRepository.GetActive();
+            }
         }
 
         // GET /api/products/{id}
@@ -87,6 +92,7 @@ namespace CatalogService.Api.Controllers
 
         // POST api/products
 
+        [Authorize(Roles = "Employee")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
@@ -95,6 +101,11 @@ namespace CatalogService.Api.Controllers
             if (!this.User.Identity.IsAuthenticated)
             {
                 return Unauthorized();
+            }
+
+            if (!User.IsInRole("Employee"))
+            {
+                return Forbid();
             }
            
              string email = User.FindFirstValue(ClaimTypes.Email);          

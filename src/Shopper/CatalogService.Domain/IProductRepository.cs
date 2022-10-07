@@ -9,6 +9,6 @@ namespace CatalogService.Domain
 {
     public interface IProductRepository : IEntityRepository<Product>
     {
-       
+       IEnumerable<Product> GetActive();
     }
 }

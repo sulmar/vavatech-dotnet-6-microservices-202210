@@ -11,6 +11,7 @@ namespace CatalogService.Domain
         public string Description { get; set; }
         public decimal Price { get; set; }
         public ProductStatus Status { get; set; }
+        public bool IsRemoved { get; set; }
     }
 
     public class Product : Item

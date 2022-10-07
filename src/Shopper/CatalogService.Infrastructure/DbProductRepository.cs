@@ -19,6 +19,11 @@ namespace CatalogService.Infrastructure
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Product> GetActive()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool IsExists(int id)
         {
             throw new NotImplementedException();

@@ -13,7 +13,7 @@ namespace CatalogService.Infrastructure
             {
                 new Product { Id = 1, Name = "Product 1"  },
                 new Product { Id = 2, Name = "Product 2", Status = ProductStatus.Published },
-                new Product { Id = 3, Name = "Product 3" },
+                new Product { Id = 3, Name = "Product 3", IsRemoved = true },
             };
 
              _products[1].Alernate = _products[0];
@@ -37,6 +37,11 @@ namespace CatalogService.Infrastructure
         public Product Get(int id)
         {
             return _products.SingleOrDefault(p => p.Id == id);
+        }
+
+        public IEnumerable<Product> GetActive()
+        {
+            return _products.Where(p => !p.IsRemoved);
         }
 
         public bool IsExists(int id)
