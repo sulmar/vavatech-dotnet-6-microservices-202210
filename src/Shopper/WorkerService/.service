@@ -1,0 +1,9 @@
+﻿[Unit]
+Description=my test app
+
+[Service]
+Type=notify
+ExecStart=/usr/sbin/testapp
+
+[Install]
+WantedBy=multi-user.target
