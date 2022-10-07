@@ -64,7 +64,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Adult", policy =>
     {
         policy.RequireAuthenticatedUser();
-        policy.RequireMinimumAge(30);
+        policy.RequireMinimumAge(18);
     });
 });
 

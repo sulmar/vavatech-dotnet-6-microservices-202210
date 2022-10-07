@@ -1,0 +1,67 @@
+﻿
+@hostname = localhost
+@port = 5001
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJFcm5lc3RpbmUuUnVudGUiLCJlbWFpbCI6IkVybmVzdGluZS5SdW50ZTk3QHlhaG9vLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL21vYmlsZXBob25lIjoiNzI5Ljg0Ni43ODE3Iiwicm9sZSI6WyJFbXBsb3llZSIsIkRldmVsb3BlciIsIlRyYWluZXIiXSwiYmlydGhkYXRlIjoiMTEuMDEuMTk5NCIsIm5iZiI6MTY2NTE1ODY0NiwiZXhwIjoxNjY1MTU5MjQ2LCJpYXQiOjE2NjUxNTg2NDYsImlzcyI6Imh0dHA6Ly9teWF1dGhhcGkuY29tIiwiYXVkIjoiaHR0cDovL215c2hvcHBlci5jb20ifQ.lLOpP_LzPGIXDxlaVbtpqOa2S54t7aq3xDHp6m73_wY
+
+GET https://{{hostname}}:{{port}}/api/products
+Authorization: Bearer {{token}}
+
+###
+
+GET https://{{hostname}}:{{port}}/api/products/5
+Authorization: Bearer {{token}}
+
+###
+
+
+PUT https://{{hostname}}:{{port}}/api/products/5
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ 
+    "Id": 1,
+    "Name": "Product 1",
+    "Description": "Lorem",
+    "Price": 200,
+    "Owner": "John.Smith"
+}
+
+### 
+
+PATCH https://{{hostname}}:{{port}}/api/products/5
+Authorization: Bearer {{token}}
+Content-Type: application/json-patch+json
+
+[
+    { "op": "replace", "path":"/price", "value": 250 },
+    { "op": "replace", "path":"/name", "value": "Lorem" }
+]
+
+
+###
+
+
+DELETE https://{{hostname}}:{{port}}/api/products/5
+Authorization: Bearer {{token}}
+
+###
+
+
+
+
+
+
+### 
+
+
+POST  https://{{hostname}}:{{port}}/api/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "Name": "Product 6",
+    "Description": "Lorem",
+    "Color": "Red",
+    "Price": 100,
+    "Owner": "John.Smith"
+}

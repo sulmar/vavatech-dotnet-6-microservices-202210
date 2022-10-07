@@ -1,0 +1,23 @@
+﻿
+@hostname = localhost
+@port = 5021
+
+
+###
+
+GET https://{{hostname}}:{{port}}/api/payments
+
+###
+
+GET https://{{hostname}}:{{port}}/api/payments/1
+
+###
+
+
+POST https://{{hostname}}:{{port}}/api/payments
+Content-Type: application/json
+
+{
+    "amount": 100,
+    "paymentType": 1    
+}

@@ -1,0 +1,8 @@
+﻿
+@hostname = localhost
+@port = 5030
+
+
+POST http://{{hostname}}:{{port}}/api/ocr/1
+
+###

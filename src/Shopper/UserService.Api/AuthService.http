@@ -1,0 +1,17 @@
+﻿
+@hostname = localhost
+@port = 5071
+
+###
+
+
+GET https://{{hostname}}:{{port}}/hello
+
+###
+
+
+GET https://{{hostname}}:{{port}}/users
+
+###
+
+GET https://{{hostname}}:{{port}}/users/cached
