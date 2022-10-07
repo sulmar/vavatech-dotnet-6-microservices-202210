@@ -91,13 +91,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService.Infrastructure"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GatewayService", "GatewayService", "{9D3B014D-FE98-49F2-B1BB-E89DB264E8C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayService.Api", "GatewayService.Api\GatewayService.Api.csproj", "{AA4173F6-A6A8-4396-A6F7-025130D932D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayService.Api", "GatewayService.Api\GatewayService.Api.csproj", "{AA4173F6-A6A8-4396-A6F7-025130D932D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SenderService", "SenderService", "{58CD4D36-4DB4-40BD-836F-E1F52218B72D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenderService.Api", "SenderService.Api\SenderService.Api.csproj", "{064B4899-9575-4A4E-BE64-1FCC11DE7569}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SenderService.Api", "SenderService.Api\SenderService.Api.csproj", "{064B4899-9575-4A4E-BE64-1FCC11DE7569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerService", "WorkerService\WorkerService.csproj", "{75B10B8D-C4A8-4CFB-A719-43919B10BF9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerService", "WorkerService\WorkerService.csproj", "{75B10B8D-C4A8-4CFB-A719-43919B10BF9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

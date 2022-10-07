@@ -1,0 +1,25 @@
+﻿version: "3.9"
+services:
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      - "13133:13133" # health_check extension
+      - "16686:16686" # serve frontend
+      - "4317:4317"   # Otlp
+
+
+  redis:      
+    image: redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --loglevel warning
+    volumes:
+      - cache:/data
+
+volumes:
+  cache:
+    driver: local

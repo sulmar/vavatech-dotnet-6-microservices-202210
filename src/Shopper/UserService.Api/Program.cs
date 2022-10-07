@@ -22,10 +22,12 @@ builder.Services.AddScoped(client => new HttpClient
 
 // dotnet add package OpenTelemetry.Instrumentation.AspNetCore --prelease
 // dotnet add package OpenTelemetry.Extensions.Hosting --prelease
-//  dotnet add package OpenTelemetry.Exporter.Console --prelease
+// dotnet add package OpenTelemetry.Exporter.Console --prelease
 // dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol --prelease
 // dotnet add package OpenTelemetry.Instrumentation.Http --prelease
 // dotnet add package OpenTelemetry.Instrumentation.StackExchangeRedis --prelease
+
+
 
 string serviceName = "UsersApi";
 string serviceVersion = "1.0";
@@ -85,7 +87,19 @@ app.MapGet("users", async (HttpClient client, ILogger<Program> logger) =>
 });
 
 
+/*
+
+ cmd> docker-compose up -d
+
+ cmd> docker exec -it userserviceapi-redis-1 redis-cli
+
+ cmd> docker-compose down
+
+*/
+
 // dotnet add package StackExchange.Redis
+
+
 
 app.MapGet("users/cached", async (HttpClient client, 
     IConnectionMultiplexer connectionMultiplexer, 
