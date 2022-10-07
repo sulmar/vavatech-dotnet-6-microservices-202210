@@ -7,6 +7,7 @@ using CatalogService.Api.Commands;
 using CatalogService.Api.Queries;
 using Microsoft.AspNetCore.SignalR;
 using CatalogService.Api.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CatalogService.Api.Controllers
 {
@@ -15,7 +16,6 @@ namespace CatalogService.Api.Controllers
 
 
     // products+
-
     [ApiController]
     [Route("/api/products")]  // RoutePrefix
     public class ProductsV1Controller : ControllerBase
@@ -83,11 +83,19 @@ namespace CatalogService.Api.Controllers
 
         // POST api/products
 
+       // [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
         public ActionResult<Product> Post(Product product, [FromServices] IMediator mediator)
         {
+
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return Unauthorized();
+            }
+
+
             mediator.Publish(new AddProductCommand(product));
 
             // hubContext.Clients.All.SendAsync("AddedProduct", product);
