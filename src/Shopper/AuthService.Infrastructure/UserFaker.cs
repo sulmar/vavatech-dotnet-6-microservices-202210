@@ -1,11 +1,12 @@
 ﻿using AuthService.Domain;
 using Bogus;
+using Microsoft.AspNetCore.Identity;
 
 namespace AuthService.Infrastructure
 {
     public class UserFaker : Faker<User>
     {
-        public UserFaker()
+        public UserFaker(IPasswordHasher<User> passwordHasher)
         {
             UseSeed(0);
             StrictMode(true);
@@ -16,9 +17,7 @@ namespace AuthService.Infrastructure
             RuleFor(p => p.Email, f => f.Person.Email);
             RuleFor(p => p.Phone, f => f.Phone.PhoneNumber());
             RuleFor(p => p.Birthday, f => f.Date.Past(40));
-
-            // TODO: zahashować!
-            RuleFor(p => p.HashedPassword, f => "12345");
+            RuleFor(p => p.HashedPassword, (f,user) => passwordHasher.HashPassword(user, "12345"));
         }
     }
 }

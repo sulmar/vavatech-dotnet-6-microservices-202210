@@ -2,6 +2,7 @@ using AuthService.Api.Models;
 using AuthService.Domain;
 using AuthService.Infrastructure;
 using Bogus;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddSingleton<Faker<User>, UserFaker>();
 builder.Services.AddSingleton<IUserRepository, FakeUserRepository>();
 builder.Services.AddSingleton<IAuthService, MyAuthService>();
 builder.Services.AddSingleton<ITokenService, JwtTokenService>();
+builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
 
 var app = builder.Build();
 
